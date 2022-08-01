@@ -178,7 +178,7 @@ class ValueState extends ChangeNotifier implements ValueListenable<dynamic>
     return _key;
   }
 
-  S setState<S>({required BuildContext context, required ValueStateInitializer initializer}) 
+  T setState<T>({required BuildContext context, required ValueStateInitializer initializer}) 
   {
     if (this.state == null) 
     {
@@ -187,7 +187,7 @@ class ValueState extends ChangeNotifier implements ValueListenable<dynamic>
       this.onInitialized?.call(context, this, st);
     }
 
-    return this.state as S;
+    return this.state as T;
   }
 
   forceValue(dynamic newValue) 
