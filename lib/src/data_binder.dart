@@ -26,15 +26,33 @@ class DataBinder
   /// - Seznam proměnných
   final _values = <String, ValueState>{};
 
+  /// Konstruktor
+  /// - Vytvoří [DataBinder].
+  ///
+  /// Argumenty
+  /// - [autoCreateValue] - pokud je true [DataBinder] automaticky vytvoří proměnnou na kterou se Widget ptá.
+  ///   Využitelné pro ladění layoutu ve chvíli kdy není ještě hotový view model.
   DataBinder({this.autoCreateValue = false});
 
+  /// Interní čtení proměnné
+  /// - Pokud nenalezne proměnnou ve [_values], prohledá [parent] binder.
   ValueState? _getValueInternal(String name)
   {
     return _values[name] ?? parent?._getValueInternal(name);
   }
 
+  /// Vrací proměnnou podle jejího jména.
+  /// - Pokud proměnná neexistuje vyvolá vyjímku.
   ValueState operator [](String name) => _getValueInternal(name)!;
 
+  /// Vrací proměnnou podle jejího jména.
+  /// - Pokud proměnná neexistuje a je povoleno [autoCreateValue], vytvoří ji.
+  /// - Pokud je [autoCreateValue] zakázáno a proměnná neexistuje vyvolá vyjímku.
+  ///
+  /// Argumenty
+  /// - [name] - název proměnné
+  /// - [defaultValue] - implicitní hodnota proměnné, použije se pokud proměnná neexistuje a vytváří se.
+  ///
   ValueState getValue(String name, {dynamic defaultValue})
   {
     if (!this.autoCreateValue)
@@ -47,6 +65,16 @@ class DataBinder
     }
   }
 
+  /// Přidává novou proměnnou do seznamu.
+  /// - Pokud proměnná existuje nahradí ji.
+  ///
+  /// Argumenty
+  /// - [name] - název proměnné.
+  /// - [presenter] - funkce provadějící konverzi hodnoty proměnné do formátu požadovaného widgetem.
+  /// - [onInitialized] - událost vyvolaná ve chvíli kdy widget nastaví stav proměnné (setState) a nastavuje.
+  /// - [onValueChanged] - událost vyvolaná ve chvíli kdy se hodnota proměnné mění.
+  /// - [onEvent] - událost kterou vyvolává zejména widget voláním doEvent (například tlačítko po tom co je stisknuto).
+  /// - [tag] - pomocná data. Může využívat jak Widget tak i View model.
   ValueState addValue
   (
     String name, dynamic value,
@@ -63,11 +91,28 @@ class DataBinder
     return result;
   }
 
+  /// Čtení hodnoty proměnné
+  /// - Volá [ValueState.read]
+  /// - Určena pro Widget. Pokud má hodnota nastavený presenter, volá ho pro konverzi.
+  /// - Čte interpretovanou hodnotu proměnné
+  /// - Pokud není proměnná nalezena, prohledá se i [parent] [DataBinder]
+  /// - Pokud není proměnná nalezena, vrátí vyjímku
+  ///
+  /// Argumenty
+  /// - name - název proměnné.
   T read<T>(String name)
   {
     return _getValueInternal(name)!.read<T>();
   }
 
+  /// Vytvoří [DataBinderWidget]
+  /// - [DataBinderWidget] je [InheritedWidget], slouží ve stromu widgetů k nalezení [DataBinder].
+  /// - Používá se zpravidla v build stránky jako root widget.
+  ///
+  /// Argumenty
+  /// - [key] - widget klíč.
+  /// - [context] - Kontext vytváření widgetů.
+  /// - [builder] - Builder vytvářející vložené widgety.
   Widget build({Key? key, required BuildContext context, required WidgetBuilder builder})
   {
     final ihnerited = context.dependOnInheritedWidgetOfExactType<DataBinderWidget>();
@@ -79,6 +124,7 @@ class DataBinder
     return DataBinderWidget(key: key, binder: this, child: Builder(builder: builder));
   }
 
+  /// Vyhledá [DataBinderWidget] a vrací k němu přiřazený [DataBinder]
   static DataBinder of(BuildContext context)
   {
     final ihnerited = context.dependOnInheritedWidgetOfExactType<DataBinderWidget>();
@@ -86,6 +132,7 @@ class DataBinder
     return ihnerited!.binder;
   }
 
+  /// Odešle notifikaci změny do všech proměnných
   forceNotifyAll()
   {
     for (final entry in this._values.entries)
@@ -95,6 +142,8 @@ class DataBinder
     parent?.forceNotifyAll();
   }
 
+  /// Čtení proměnné
+  ///
   T readOrDefault<T>
   (
     {required T defaultValue, String? sourceValueName, ValueState? propertySource, dynamic keyParameter}
