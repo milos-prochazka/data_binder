@@ -5,10 +5,25 @@ import 'package:flutter/material.dart';
 
 typedef ValuePresenter = dynamic Function(dynamic value, dynamic parameter, Type type);
 
+/// ### Hlavní třída propojování hodnot proměnných a Widgetů
+///
+/// - [DataBinder] zpravidla vytváří ViewModel pro propojení událostí s Widgety
+/// - Obsahuje seznam proměnných [_values]
+///
 class DataBinder 
 {
+  /// - Pokud je true [DataBinder] automaticky vytvoří proměnnou na kterou se Widget ptá.
+  /// - Využitelné pro ladění layoutu ve chvíli kdy není ještě hotový view model.
   bool autoCreateValue;
+
+  /// Nadřízený [DataBinder]
+  /// - Pokud není proměnná nalezena prohledá se tento nadřízený [DataBinder]
+  /// - Slouží k hiearchickému propojení DataBinderu
+  ///   - Například Binder na úrovni aplikace obsahuje proměnné sdílené mezi stránkami aplikace.
+  ///   - A vnořený binder vyvořený view modelem obsahuje proměnné vztahující se k Widgetu stránky.
   DataBinder? parent;
+
+  /// - Seznam proměnných
   final _values = <String, ValueState>{};
 
   DataBinder({this.autoCreateValue = false});
