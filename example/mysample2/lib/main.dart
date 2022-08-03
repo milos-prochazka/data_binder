@@ -249,7 +249,7 @@ class _MyHomePageState extends State<MyHomePage>
                       );
                     },
                   ),*/
-                    DataBinderBuilder.buildCheckBox
+                    buildCheckBox
                     (
                       context,
                       bindValue: 'check',
@@ -265,7 +265,7 @@ class _MyHomePageState extends State<MyHomePage>
                         return Text(value.readString('aaa'), style: style);
                       }
                     ),
-                    DataBinderBuilder.buildText(context, bindValue: 'counter', styleParam: 'style'),
+                    buildText(context, bindValue: 'counter', styleParam: 'style'),
                     binder.getValue('editor').buildWidget
                     (
                       context, builder: (context, value, child)
@@ -297,22 +297,21 @@ class _MyHomePageState extends State<MyHomePage>
                         );
                       }
                     ),
-                    DataBinderBuilder.buildTextField(context, bindValue: 'editor1'),
+                    buildTextField(context, bindValue: 'editor1'),
                     Padding
                     (
                       padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                      child:
-                      DataBinderBuilder.buildCupertinoTextFieldBorderless(context, bindValue: 'editor1')
+                      child: buildCupertinoTextFieldBorderless(context, bindValue: 'editor1')
                     ),
                     buildRadio(context, 'radio'),
-                    DataBinderBuilder.buildElevatedButtonIcon
+                    buildElevatedButtonIcon
                     (
                       context,
                       bindValue: 'button1',
                       label: const Text('BUTTON1', style: TextStyle(fontSize: 20.0, color: Colors.white)),
                       icon: Text('icon')
                     ),
-                    DataBinderBuilder.buildDropdownButton
+                    buildDropdownButton
                     (
                       context,
                       bindValue: 'drop_down',
@@ -329,7 +328,7 @@ class _MyHomePageState extends State<MyHomePage>
                         }
                       ).toList()
                     ),
-                    DataBinderBuilder.buildSlider
+                    buildSlider
                     (
                       context,
                       bindValue: 'slider',
@@ -338,10 +337,10 @@ class _MyHomePageState extends State<MyHomePage>
                       min: 0,
                       max: 100
                     ),
-                    DataBinderBuilder.buildCupertinoSlider(context, bindValue: 'slider', min: 0, max: 100),
-                    DataBinderBuilder.buildSwitch(context, bindValue: 'switch'),
-                    DataBinderBuilder.buildCupertinoSwitch(context, bindValue: 'switch'),
-                    DataBinderBuilder.buildCupertinoButtonFilled(context,
+                    buildCupertinoSlider(context, bindValue: 'slider', min: 0, max: 100),
+                    buildSwitch(context, bindValue: 'switch'),
+                    buildCupertinoSwitch(context, bindValue: 'switch'),
+                    buildCupertinoButtonFilled(context,
                       bindValue: 'button2', child: Text('Cupertino Tlacitko'), enabled: false),
                     CupertinoButton.filled
                     (
@@ -351,15 +350,14 @@ class _MyHomePageState extends State<MyHomePage>
                     Padding
                     (
                       padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                      child: DataBinderBuilder.buildCircularProgressIndicatorAdaptive(context,
-                        bindValue: 'counter')
+                      child: buildCircularProgressIndicatorAdaptive(context, bindValue: 'counter')
                     ),
                     Padding
                     (
                       padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
-                      child: DataBinderBuilder.buildLinearProgressIndicator(context, bindValue: 'counter'),
+                      child: buildLinearProgressIndicator(context, bindValue: 'counter'),
                     ),
-                    DataBinderBuilder.buildVisibility
+                    buildVisibility
                     (
                       context,
                       bindValue: 'counter',
@@ -398,7 +396,7 @@ class _MyHomePageState extends State<MyHomePage>
       context: context,
       builder: (popupContext)
       {
-        return DataBinderBuilder.buildCupertinoActionSheet
+        return buildCupertinoActionSheet
         (
           context,
           bindValue: 'action-event',
@@ -437,7 +435,7 @@ class _MyHomePageState extends State<MyHomePage>
               },
               child: const Text('Destructive Action'),
             ),
-            DataBinderBuilder.buildCupertinoActionSheetAction
+            buildCupertinoActionSheetAction
             (
               context,
               popupContext: popupContext, //
@@ -452,7 +450,7 @@ class _MyHomePageState extends State<MyHomePage>
 
   Widget buildRadio(BuildContext context, String bindValue)
   {
-    return DataBinderBuilder.buildBasicRadioColumn<RadioValues>
+    return buildBasicRadioColumn<RadioValues>
     (
       context,
       bindValue: bindValue,

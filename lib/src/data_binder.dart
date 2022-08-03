@@ -144,6 +144,47 @@ class DataBinder
 
   /// Čtení proměnné
   ///
+  /// Speciální forma určená pro buildery widgetů. Viz třeba [buildText].
+  ///
+  /// - Pokud je zadán název proměnné [sourceValueName] čtehodnotu z této proeměnné. Pro čtení použije doplňkový parametr [keyParameter].
+  /// - Pokud není zadáno [sourceValueName], použije dvojici [propertySource] a [keyParameter].
+  ///   - [propertySource]  je v builderech hlavní proměnná ve které se čtou data.
+  /// - Pokud není proměnná zadána pouřije se defaultValue.
+  ///
+  /// Více viz příklad:
+  /// ~~~
+  /// Widget buildMyText
+  /// (
+  ///    BuildContext context,
+  ///    {required String bindValue,   // Hlavni proměnná ze které se čte text
+  ///    dynamic bindValueParam,
+  ///    //////////////
+  ///    TextStyle? style,             // Styl - zadaný přímo odkazem na TextStyle
+  ///    String? styleValue,           // Název proměnné ze které se čte Style
+  ///    dynamic styleParam,           // Parametr používaný pro čtení hodnoty
+  ///    //////////////
+  /// )
+  /// {
+  ///   final binder = DataBinder.of(context); // Získání odkazu na binder
+
+  ///   return binder.getValue(bindValue, defaultValue: '').buildWidget
+  ///   (
+  ///     context, //
+  ///     builder: (context, value, child)
+  ///     {
+  ///       return Text
+  ///       (
+  ///         value.readString(bindValueParam), // Čtení hodnoty proměnné
+  ///         key: value.setKey(key),
+  ///         style: binder.readOrDefault
+  ///         (
+  ///           defaultValue: style, sourceValueName: styleValue, propertySource: value, keyParameter: styleParam
+  ///         ),
+  ///       );
+  ///     }
+  ///   );
+  /// }
+  /// ~~~
   T readOrDefault<T>
   (
     {required T defaultValue, String? sourceValueName, ValueState? propertySource, dynamic keyParameter}
