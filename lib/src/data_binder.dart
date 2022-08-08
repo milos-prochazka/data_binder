@@ -149,7 +149,7 @@ class DataBinder
   /// - Pokud je zadán název proměnné [sourceValueName] čtehodnotu z této proeměnné. Pro čtení použije doplňkový parametr [keyParameter].
   /// - Pokud není zadáno [sourceValueName], použije dvojici [propertySource] a [keyParameter].
   ///   - [propertySource]  je v builderech hlavní proměnná ve které se čtou data.
-  /// - Pokud není proměnná zadána pouřije se defaultValue.
+  /// - Pokud není proměnná zadána použije se defaultValue.
   ///
   /// Více viz příklad:
   /// ~~~
@@ -176,6 +176,11 @@ class DataBinder
   ///       (
   ///         value.readString(bindValueParam), // Čtení hodnoty proměnné
   ///         key: value.setKey(key),
+  ///         // - styl může být zadán přímo - style: myStyle
+  ///         // - nebo se může číst z proměnné bindValue - styleParam: 'myStyle'
+  ///         //   (odpovídá čtení value.read('myStyle'))
+  ///         // - číst z jiné proměnné styleValue: 'myStyleValue', styleParam : 'myHighlinedSyle'
+  ///         //   (POZOR!!! v tomto případě se po změně proměnné myStyle widget automaticky neobnoví)
   ///         style: binder.readOrDefault
   ///         (
   ///           defaultValue: style, sourceValueName: styleValue, propertySource: value, keyParameter: styleParam
@@ -208,6 +213,8 @@ class DataBinder
   }
 }
 
+/// Třída rozšiřující InheritedWidget
+/// - Provádí vazbu na DataBinder a umožňuje ho vyhledat ve stromu widgetů
 class DataBinderWidget extends InheritedWidget
 {
   final DataBinder binder;
@@ -220,6 +227,11 @@ class DataBinderWidget extends InheritedWidget
   }
 }
 
+/// Třída uchovávající stav proměnné a zajišťující obousměrnou vazbu mezi widgetem a view modelem
+/// - Rozšiřuje vlastnosti  [ValueListenable]
+/// - Proměnné se identifikují názvem (text)
+/// - Při změně předává notifikace do widgetu a pomocí události [onValueChanged] do view modelu.
+/// -
 class ValueState extends ChangeNotifier implements ValueListenable<dynamic>
 {
   String name;
