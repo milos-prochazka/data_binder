@@ -64,26 +64,26 @@ Widget buildText
         style: binder.readOrDefault
         (
           defaultValue: style, sourceValueName: styleValue, propertySource: value, keyParameter: styleParam
-          ),
+        ),
         strutStyle: binder.readOrDefault
         (
           defaultValue: strutStyle,
-            sourceValueName: bindStrutStyle,
-            propertySource: value,
-            keyParameter: bindStrutStyleParam
-          ),
+          sourceValueName: bindStrutStyle,
+          propertySource: value,
+          keyParameter: bindStrutStyleParam
+        ),
         textAlign: textAlign,
         textDirection: binder.readOrDefault
         (
           defaultValue: textDirection,
-            sourceValueName: bindTextDirection,
-            propertySource: value,
-            keyParameter: bindTextDirectionParam
-          ),
+          sourceValueName: bindTextDirection,
+          propertySource: value,
+          keyParameter: bindTextDirectionParam
+        ),
         locale: binder.readOrDefault
         (
           defaultValue: locale, sourceValueName: bindLocale, propertySource: value, keyParameter: bindLocaleParam
-          ),
+        ),
         softWrap: softWrap,
         overflow: overflow,
         textScaleFactor: textScaleFactor,
@@ -91,10 +91,10 @@ Widget buildText
         semanticsLabel: binder.readOrDefault
         (
           defaultValue: semanticsLabel,
-            sourceValueName: bindSemanticsLabel,
-            propertySource: value,
-            keyParameter: bindSemanticsLabelParam
-          ),
+          sourceValueName: bindSemanticsLabel,
+          propertySource: value,
+          keyParameter: bindSemanticsLabelParam
+        ),
         textWidthBasis: textWidthBasis,
         textHeightBehavior: textHeightBehavior
       );
@@ -146,7 +146,7 @@ Widget buildRichText
         text: binder.readOrDefault
         (
           defaultValue: text, sourceValueName: bindValue, propertySource: value, keyParameter: bindValueParam
-          ),
+        ),
         textAlign: textAlign,
         softWrap: softWrap,
         overflow: overflow,
@@ -155,21 +155,21 @@ Widget buildRichText
         locale: binder.readOrDefault
         (
           defaultValue: locale, sourceValueName: bindLocale, propertySource: value, keyParameter: bindLocaleParam
-          ),
+        ),
         textDirection: binder.readOrDefault
         (
           defaultValue: textDirection,
-            sourceValueName: bindTextDirection,
-            propertySource: value,
-            keyParameter: bindTextDirectionParam
-          ),
+          sourceValueName: bindTextDirection,
+          propertySource: value,
+          keyParameter: bindTextDirectionParam
+        ),
         strutStyle: binder.readOrDefault
         (
           defaultValue: strutStyle,
-            sourceValueName: bindStrutStyle,
-            propertySource: value,
-            keyParameter: bindStrutStyleParam
-          ),
+          sourceValueName: bindStrutStyle,
+          propertySource: value,
+          keyParameter: bindStrutStyleParam
+        ),
         textWidthBasis: textWidthBasis,
         textHeightBehavior: textHeightBehavior
       );
@@ -208,7 +208,7 @@ Widget buildElevatedButton
       final enableEvent = binder.readOrDefault
       (
         defaultValue: enabled, sourceValueName: enabledValue, propertySource: value, keyParameter: enabledValueParam
-        );
+      );
 
       return ElevatedButton
       (
@@ -227,7 +227,7 @@ Widget buildElevatedButton
         style: binder.readOrDefault
         (
           defaultValue: style, sourceValueName: styleValue, propertySource: value, keyParameter: styleParam
-          ),
+        ),
         focusNode: focusNode,
         autofocus: autofocus,
         clipBehavior: clipBehavior,
@@ -268,7 +268,7 @@ Widget buildCupertinoButton
       final enableEvent = binder.readOrDefault
       (
         defaultValue: enabled, sourceValueName: enabledValue, propertySource: value, keyParameter: enabledValueParam
-        );
+      );
 
       return CupertinoButton
       (
@@ -318,7 +318,7 @@ Widget buildCupertinoButtonFilled
       final enableEvent = binder.readOrDefault
       (
         defaultValue: enabled, sourceValueName: enabledValue, propertySource: value, keyParameter: enabledValueParam
-        );
+      );
 
       return CupertinoButton.filled
       (
@@ -369,7 +369,7 @@ Widget buildElevatedButtonIcon
       final enableEvent = binder.readOrDefault
       (
         defaultValue: enabled, sourceValueName: enabledValue, propertySource: value, keyParameter: enabledValueParam
-        );
+      );
 
       return ElevatedButton.icon
       (
@@ -389,7 +389,7 @@ Widget buildElevatedButtonIcon
         style: binder.readOrDefault
         (
           defaultValue: style, sourceValueName: styleValue, propertySource: value, keyParameter: styleParam
-          ),
+        ),
         focusNode: focusNode,
         autofocus: autofocus,
         clipBehavior: clipBehavior,
@@ -432,7 +432,7 @@ Widget buildTextButton
       final enableEvent = binder.readOrDefault
       (
         defaultValue: enabled, sourceValueName: enabledValue, propertySource: value, keyParameter: enabledValueParam
-        );
+      );
 
       return TextButton
       (
@@ -452,7 +452,7 @@ Widget buildTextButton
         style: binder.readOrDefault
         (
           defaultValue: style, sourceValueName: styleValue, propertySource: value, keyParameter: styleParam
-          ),
+        ),
         focusNode: focusNode,
         autofocus: autofocus,
         clipBehavior: clipBehavior,
@@ -495,7 +495,7 @@ Widget buildTextButtonIcon
       final enableEvent = binder.readOrDefault
       (
         defaultValue: enabled, sourceValueName: enabledValue, propertySource: value, keyParameter: enabledValueParam
-        );
+      );
 
       return TextButton.icon
       (
@@ -515,7 +515,7 @@ Widget buildTextButtonIcon
         style: binder.readOrDefault
         (
           defaultValue: style, sourceValueName: styleValue, propertySource: value, keyParameter: styleParam
-          ),
+        ),
         focusNode: focusNode,
         autofocus: autofocus,
         clipBehavior: clipBehavior,
@@ -558,7 +558,7 @@ Widget buildOutlinedButton
       final enableEvent = binder.readOrDefault
       (
         defaultValue: enabled, sourceValueName: enabledValue, propertySource: value, keyParameter: enabledValueParam
-        );
+      );
 
       return OutlinedButton
       (
@@ -578,7 +578,7 @@ Widget buildOutlinedButton
         style: binder.readOrDefault
         (
           defaultValue: style, sourceValueName: styleValue, propertySource: value, keyParameter: styleParam
-          ),
+        ),
         focusNode: focusNode,
         autofocus: autofocus,
         clipBehavior: clipBehavior,
@@ -621,7 +621,7 @@ Widget buildOutlinedButtonIcon
       final enableEvent = binder.readOrDefault
       (
         defaultValue: enabled, sourceValueName: enabledValue, propertySource: value, keyParameter: enabledValueParam
-        );
+      );
 
       return OutlinedButton.icon
       (
@@ -635,7 +635,7 @@ Widget buildOutlinedButtonIcon
         style: binder.readOrDefault
         (
           defaultValue: style, sourceValueName: styleValue, propertySource: value, keyParameter: styleParam
-          ),
+        ),
         focusNode: focusNode,
         autofocus: autofocus,
         clipBehavior: clipBehavior,
@@ -700,12 +700,12 @@ Widget buildIconButton
       final enableEvent = binder.readOrDefault
       (
         defaultValue: enabled, sourceValueName: enabledValue, propertySource: value, keyParameter: enabledValueParam
-        );
+      );
 
       final btnStyle = binder.readOrDefault
       (
         defaultValue: style, sourceValueName: styleValue, propertySource: value, keyParameter: styleParam
-        );
+      );
 
       return IconButton
       (
@@ -727,20 +727,20 @@ Widget buildIconButton
         mouseCursor: binder.readOrDefault
         (
           defaultValue: mouseCursor,
-            sourceValueName: mouseValue,
-            propertySource: value,
-            keyParameter: mouseValueParam
-          ),
+          sourceValueName: mouseValue,
+          propertySource: value,
+          keyParameter: mouseValueParam
+        ),
         focusNode: focusNode,
         autofocus: autofocus,
         // mouseCursor
         tooltip: binder.readOrDefault
         (
           defaultValue: tooltip,
-            sourceValueName: tooltipValue,
-            propertySource: value,
-            keyParameter: tooltipValueParam
-          ),
+          sourceValueName: tooltipValue,
+          propertySource: value,
+          keyParameter: tooltipValueParam
+        ),
         enableFeedback: enableFeedback,
         constraints: constraints,
         icon: icon!
@@ -799,7 +799,7 @@ Widget buildDropdownButton<T>
       final enableEvent = binder.readOrDefault
       (
         defaultValue: enabled, sourceValueName: enabledValue, propertySource: value, keyParameter: enabledValueParam
-        );
+      );
 
       return DropdownButton<T>
       (
@@ -808,14 +808,14 @@ Widget buildDropdownButton<T>
         style: binder.readOrDefault
         (
           defaultValue: style, sourceValueName: styleValue, propertySource: value, keyParameter: styleParam
-          ),
+        ),
         // items
         items: items,
         // value
         value: binder.readOrDefault
         (
           defaultValue: null, sourceValueName: bindValue, propertySource: value, keyParameter: bindValueParam
-          ),
+        ),
         selectedItemBuilder: selectedItemBuilder,
         hint: hint,
         disabledHint: disabledHint,
@@ -902,20 +902,20 @@ Widget buildCheckBox
         value: binder.readOrDefault
         (
           defaultValue: tristate ? null : false,
-            sourceValueName: bindValue,
-            propertySource: value,
-            keyParameter: bindValueParam
-          ),
+          sourceValueName: bindValue,
+          propertySource: value,
+          keyParameter: bindValueParam
+        ),
         // onChanged event
         onChanged:
         (
           binder.readOrDefault
           (
             defaultValue: enabled,
-              sourceValueName: enabledValue,
-              propertySource: value,
-              keyParameter: enabledValueParam
-            )
+            sourceValueName: enabledValue,
+            propertySource: value,
+            keyParameter: enabledValueParam
+          )
           ?
           (
             setValueAfterOnChanged
@@ -928,7 +928,7 @@ Widget buildCheckBox
         mouseCursor: binder.readOrDefault
         (
           defaultValue: mouseCursor, sourceValueName: mouseValue, propertySource: value, keyParameter: mouseValueParam
-          ),
+        ),
         //
         activeColor: activeColor,
         fillColor: fillColor,
@@ -994,10 +994,10 @@ Widget buildRadio<T>
         onChanged: binder.readOrDefault
         (
           defaultValue: enabled,
-            sourceValueName: enabledValue,
-            propertySource: value,
-            keyParameter: enabledValueParam
-          )
+          sourceValueName: enabledValue,
+          propertySource: value,
+          keyParameter: enabledValueParam
+        )
         ?
         (
           setValueAfterOnChanged
@@ -1009,10 +1009,10 @@ Widget buildRadio<T>
         mouseCursor: binder.readOrDefault
         (
           defaultValue: mouseCursor,
-            sourceValueName: mouseValue,
-            propertySource: value,
-            keyParameter: mouseValueParam
-          ),
+          sourceValueName: mouseValue,
+          propertySource: value,
+          keyParameter: mouseValueParam
+        ),
         //
         toggleable: toggleable,
         activeColor: activeColor,
@@ -1079,10 +1079,10 @@ Widget buildRadioListTile<T>
         onChanged: binder.readOrDefault
         (
           defaultValue: enabled,
-            sourceValueName: enabledValue,
-            propertySource: value,
-            keyParameter: enabledValueParam
-          )
+          sourceValueName: enabledValue,
+          propertySource: value,
+          keyParameter: enabledValueParam
+        )
         ?
         (
           setValueAfterOnChanged
@@ -1169,10 +1169,10 @@ Widget buildBasicRadioColumn<T>
             onChanged: binder.readOrDefault
             (
               defaultValue: enabled,
-                sourceValueName: enabledValue,
-                propertySource: value,
-                keyParameter: enabledValueParam
-              )
+              sourceValueName: enabledValue,
+              propertySource: value,
+              keyParameter: enabledValueParam
+            )
             ?
             (
               setValueAfterOnChanged
@@ -1309,14 +1309,14 @@ Widget buildTextField
         style: binder.readOrDefault
         (
           defaultValue: style, sourceValueName: styleValue, propertySource: value, keyParameter: styleParam
-          ),
+        ),
         strutStyle: binder.readOrDefault
         (
           defaultValue: strutStyle,
-            sourceValueName: bindStrutStyle,
-            propertySource: value,
-            keyParameter: bindStrutStyleParam
-          ),
+          sourceValueName: bindStrutStyle,
+          propertySource: value,
+          keyParameter: bindStrutStyleParam
+        ),
         textAlign: textAlign,
         textAlignVertical: textAlignVertical,
         textDirection: textDirection,
@@ -1328,10 +1328,10 @@ Widget buildTextField
         obscureText: binder.readOrDefault
         (
           defaultValue: obscureText,
-            sourceValueName: bindObscureText,
-            propertySource: value,
-            keyParameter: bindObscureTextParam
-          ),
+          sourceValueName: bindObscureText,
+          propertySource: value,
+          keyParameter: bindObscureTextParam
+        ),
         autocorrect: autocorrect,
         smartDashesType: smartDashesType,
         smartQuotesType: smartQuotesType,
@@ -1349,7 +1349,7 @@ Widget buildTextField
         enabled: binder.readOrDefault
         (
           defaultValue: enabled, sourceValueName: bindEnabled, propertySource: value, keyParameter: bindEnabledParam
-          ),
+        ),
         cursorWidth: cursorWidth,
         cursorHeight: cursorHeight,
         cursorRadius: cursorRadius,
@@ -1365,10 +1365,10 @@ Widget buildTextField
         mouseCursor: binder.readOrDefault
         (
           defaultValue: mouseCursor,
-            sourceValueName: bindMouseCursor,
-            propertySource: value,
-            keyParameter: bindMouseCursorParam
-          ),
+          sourceValueName: bindMouseCursor,
+          propertySource: value,
+          keyParameter: bindMouseCursorParam
+        ),
         buildCounter: buildCounter,
         scrollController: scrollController,
         scrollPhysics: scrollPhysics,
@@ -1520,10 +1520,10 @@ Widget buildCupertinoTextField
         placeholderStyle: binder.readOrDefault
         (
           defaultValue: placeholderStyle,
-            sourceValueName: placeholderStyleValue,
-            propertySource: value,
-            keyParameter: placeholderStyleParam
-          ),
+          sourceValueName: placeholderStyleValue,
+          propertySource: value,
+          keyParameter: placeholderStyleParam
+        ),
         prefix: prefix,
         prefixMode: prefixMode,
         suffix: suffix,
@@ -1535,14 +1535,14 @@ Widget buildCupertinoTextField
         style: binder.readOrDefault
         (
           defaultValue: style, sourceValueName: styleValue, propertySource: value, keyParameter: styleParam
-          ),
+        ),
         strutStyle: binder.readOrDefault
         (
           defaultValue: strutStyle,
-            sourceValueName: bindStrutStyle,
-            propertySource: value,
-            keyParameter: bindStrutStyleParam
-          ),
+          sourceValueName: bindStrutStyle,
+          propertySource: value,
+          keyParameter: bindStrutStyleParam
+        ),
         textAlign: textAlign,
         textAlignVertical: textAlignVertical,
         textDirection: textDirection,
@@ -1554,10 +1554,10 @@ Widget buildCupertinoTextField
         obscureText: binder.readOrDefault
         (
           defaultValue: obscureText,
-            sourceValueName: bindObscureText,
-            propertySource: value,
-            keyParameter: bindObscureTextParam
-          ),
+          sourceValueName: bindObscureText,
+          propertySource: value,
+          keyParameter: bindObscureTextParam
+        ),
         autocorrect: autocorrect,
         smartDashesType: smartDashesType,
         smartQuotesType: smartQuotesType,
@@ -1574,7 +1574,7 @@ Widget buildCupertinoTextField
         enabled: binder.readOrDefault
         (
           defaultValue: enabled, sourceValueName: bindEnabled, propertySource: value, keyParameter: bindEnabledParam
-          ),
+        ),
         cursorWidth: cursorWidth,
         cursorHeight: cursorHeight,
         cursorRadius: cursorRadius,
@@ -1707,10 +1707,10 @@ Widget buildCupertinoTextFieldBorderless
         placeholderStyle: binder.readOrDefault
         (
           defaultValue: placeholderStyle,
-            sourceValueName: placeholderStyleValue,
-            propertySource: value,
-            keyParameter: placeholderStyleParam
-          ),
+          sourceValueName: placeholderStyleValue,
+          propertySource: value,
+          keyParameter: placeholderStyleParam
+        ),
         prefix: prefix,
         prefixMode: prefixMode,
         suffix: suffix,
@@ -1722,14 +1722,14 @@ Widget buildCupertinoTextFieldBorderless
         style: binder.readOrDefault
         (
           defaultValue: style, sourceValueName: styleValue, propertySource: value, keyParameter: styleParam
-          ),
+        ),
         strutStyle: binder.readOrDefault
         (
           defaultValue: strutStyle,
-            sourceValueName: bindStrutStyle,
-            propertySource: value,
-            keyParameter: bindStrutStyleParam
-          ),
+          sourceValueName: bindStrutStyle,
+          propertySource: value,
+          keyParameter: bindStrutStyleParam
+        ),
         textAlign: textAlign,
         textAlignVertical: textAlignVertical,
         textDirection: textDirection,
@@ -1741,10 +1741,10 @@ Widget buildCupertinoTextFieldBorderless
         obscureText: binder.readOrDefault
         (
           defaultValue: obscureText,
-            sourceValueName: bindObscureText,
-            propertySource: value,
-            keyParameter: bindObscureTextParam
-          ),
+          sourceValueName: bindObscureText,
+          propertySource: value,
+          keyParameter: bindObscureTextParam
+        ),
         autocorrect: autocorrect,
         smartDashesType: smartDashesType,
         smartQuotesType: smartQuotesType,
@@ -1761,7 +1761,7 @@ Widget buildCupertinoTextFieldBorderless
         enabled: binder.readOrDefault
         (
           defaultValue: enabled, sourceValueName: bindEnabled, propertySource: value, keyParameter: bindEnabledParam
-          ),
+        ),
         cursorWidth: cursorWidth,
         cursorHeight: cursorHeight,
         cursorRadius: cursorRadius,
@@ -1826,7 +1826,7 @@ Widget buildSlider
       final enableEvent = binder.readOrDefault
       (
         defaultValue: enabled, sourceValueName: enabledValue, propertySource: value, keyParameter: enabledValueParam
-        );
+      );
 
       return Slider
       (
@@ -1866,10 +1866,10 @@ Widget buildSlider
         mouseCursor: binder.readOrDefault
         (
           defaultValue: mouseCursor,
-            sourceValueName: bindMouseCursor,
-            propertySource: value,
-            keyParameter: bindMouseCursorParam
-          ),
+          sourceValueName: bindMouseCursor,
+          propertySource: value,
+          keyParameter: bindMouseCursorParam
+        ),
         semanticFormatterCallback: semanticFormatterCallback,
         focusNode: focusNode,
         autofocus: autofocus,
@@ -1908,7 +1908,7 @@ Widget buildCupertinoSlider
       final enableEvent = binder.readOrDefault
       (
         defaultValue: enabled, sourceValueName: enabledValue, propertySource: value, keyParameter: enabledValueParam
-        );
+      );
 
       return CupertinoSlider
       (
@@ -1988,7 +1988,7 @@ Widget buildSliderAdaptive
       final enableEvent = binder.readOrDefault
       (
         defaultValue: enabled, sourceValueName: enabledValue, propertySource: value, keyParameter: enabledValueParam
-        );
+      );
 
       return Slider.adaptive
       (
@@ -2028,10 +2028,10 @@ Widget buildSliderAdaptive
         mouseCursor: binder.readOrDefault
         (
           defaultValue: mouseCursor,
-            sourceValueName: bindMouseCursor,
-            propertySource: value,
-            keyParameter: bindMouseCursorParam
-          ),
+          sourceValueName: bindMouseCursor,
+          propertySource: value,
+          keyParameter: bindMouseCursorParam
+        ),
         semanticFormatterCallback: semanticFormatterCallback,
         focusNode: focusNode,
         autofocus: autofocus,
@@ -2088,7 +2088,7 @@ Widget buildSwitch
       final enableEvent = binder.readOrDefault
       (
         defaultValue: enabled, sourceValueName: enabledValue, propertySource: value, keyParameter: enabledValueParam
-        );
+      );
 
       return Switch
       (
@@ -2121,10 +2121,10 @@ Widget buildSwitch
         mouseCursor: binder.readOrDefault
         (
           defaultValue: mouseCursor,
-            sourceValueName: bindMouseCursor,
-            propertySource: value,
-            keyParameter: bindMouseCursorParam
-          ),
+          sourceValueName: bindMouseCursor,
+          propertySource: value,
+          keyParameter: bindMouseCursorParam
+        ),
         focusColor: focusColor,
         hoverColor: hoverColor,
         overlayColor: overlayColor,
@@ -2165,7 +2165,7 @@ Widget buildCupertinoSwitch
       final enableEvent = binder.readOrDefault
       (
         defaultValue: enabled, sourceValueName: enabledValue, propertySource: value, keyParameter: enabledValueParam
-        );
+      );
 
       return CupertinoSwitch
       (
@@ -2240,7 +2240,7 @@ Widget buildSwitchAdaptive
       final enableEvent = binder.readOrDefault
       (
         defaultValue: enabled, sourceValueName: enabledValue, propertySource: value, keyParameter: enabledValueParam
-        );
+      );
 
       return Switch.adaptive
       (
@@ -2273,10 +2273,10 @@ Widget buildSwitchAdaptive
         mouseCursor: binder.readOrDefault
         (
           defaultValue: mouseCursor,
-            sourceValueName: bindMouseCursor,
-            propertySource: value,
-            keyParameter: bindMouseCursorParam
-          ),
+          sourceValueName: bindMouseCursor,
+          propertySource: value,
+          keyParameter: bindMouseCursorParam
+        ),
         focusColor: focusColor,
         hoverColor: hoverColor,
         overlayColor: overlayColor,
@@ -2332,10 +2332,10 @@ Widget buildPopupMenuButton<T>
         enabled: binder.readOrDefault
         (
           defaultValue: enabled,
-            sourceValueName: enabledValue,
-            propertySource: value,
-            keyParameter: enabledValueParam
-          ),
+          sourceValueName: enabledValue,
+          propertySource: value,
+          keyParameter: enabledValueParam
+        ),
         itemBuilder: itemBuilder,
         initialValue: value.read<T?>(bindValueParam),
         tooltip: tooltip,
@@ -2463,7 +2463,7 @@ CupertinoDialogAction buildCupertinoDialogAction
     textStyle: binder.readOrDefault
     (
       defaultValue: style, sourceValueName: styleValue, propertySource: value, keyParameter: styleParam
-      ),
+    ),
     child: child,
   );
 }
@@ -2507,17 +2507,17 @@ Widget buildCircularProgressIndicator
         semanticsLabel: binder.readOrDefault
         (
           defaultValue: semanticsLabel,
-            sourceValueName: semanticsLabelValue,
-            propertySource: value,
-            keyParameter: semanticsLabelParam
-          ),
+          sourceValueName: semanticsLabelValue,
+          propertySource: value,
+          keyParameter: semanticsLabelParam
+        ),
         semanticsValue: binder.readOrDefault
         (
           defaultValue: semanticsValue,
-            sourceValueName: semanticsValueValue,
-            propertySource: value,
-            keyParameter: semanticsValueParam
-          ),
+          sourceValueName: semanticsValueValue,
+          propertySource: value,
+          keyParameter: semanticsValueParam
+        ),
       );
     }
   );
@@ -2557,35 +2557,35 @@ Widget buildCircularProgressIndicatorAdaptive
       {
         case TargetPlatform.iOS:
         case TargetPlatform.macOS:
-          return CupertinoActivityIndicator.partiallyRevealed
-          (
-            key: value.setKey(key), color: backgroundColor, progress: progress, radius: radius ?? 10.0
-          );
+        return CupertinoActivityIndicator.partiallyRevealed
+        (
+          key: value.setKey(key), color: backgroundColor, progress: progress, radius: radius ?? 10.0
+        );
 
         default:
-          final indicator = CircularProgressIndicator
+        final indicator = CircularProgressIndicator
+        (
+          key: value.setKey(key),
+          value: progress,
+          backgroundColor: backgroundColor,
+          valueColor: valueColor,
+          strokeWidth: strokeWidth,
+          semanticsLabel: binder.readOrDefault
           (
-            key: value.setKey(key),
-            value: progress,
-            backgroundColor: backgroundColor,
-            valueColor: valueColor,
-            strokeWidth: strokeWidth,
-            semanticsLabel: binder.readOrDefault
-            (
-              defaultValue: semanticsLabel,
-                sourceValueName: semanticsLabelValue,
-                propertySource: value,
-                keyParameter: semanticsLabelParam
-              ),
-            semanticsValue: binder.readOrDefault
-            (
-              defaultValue: semanticsValue,
-                sourceValueName: semanticsValueValue,
-                propertySource: value,
-                keyParameter: semanticsValueParam
-              ),
-          );
-          return (radius == null) ? indicator : SizedBox(width: radius, height: radius, child: indicator);
+            defaultValue: semanticsLabel,
+            sourceValueName: semanticsLabelValue,
+            propertySource: value,
+            keyParameter: semanticsLabelParam
+          ),
+          semanticsValue: binder.readOrDefault
+          (
+            defaultValue: semanticsValue,
+            sourceValueName: semanticsValueValue,
+            propertySource: value,
+            keyParameter: semanticsValueParam
+          ),
+        );
+        return (radius == null) ? indicator : SizedBox(width: radius, height: radius, child: indicator);
       }
     }
   );
@@ -2632,17 +2632,17 @@ Widget buildLinearProgressIndicator
         semanticsLabel: binder.readOrDefault
         (
           defaultValue: semanticsLabel,
-            sourceValueName: semanticsLabelValue,
-            propertySource: value,
-            keyParameter: semanticsLabelParam
-          ),
+          sourceValueName: semanticsLabelValue,
+          propertySource: value,
+          keyParameter: semanticsLabelParam
+        ),
         semanticsValue: binder.readOrDefault
         (
           defaultValue: semanticsValue,
-            sourceValueName: semanticsValueValue,
-            propertySource: value,
-            keyParameter: semanticsValueParam
-          ),
+          sourceValueName: semanticsValueValue,
+          propertySource: value,
+          keyParameter: semanticsValueParam
+        ),
       );
     }
   );

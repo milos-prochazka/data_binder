@@ -203,7 +203,8 @@ class DataBinder
       }
       else
       {
-        return propertySource.getProperty(keyParameter) ?? defaultValue;
+        //return propertySource.getProperty(keyParameter) ?? defaultValue; ~~smazat properties
+        return propertySource.read<T>(keyParameter) ?? defaultValue;
       }
     }
     else
@@ -232,6 +233,7 @@ class DataBinderWidget extends InheritedWidget
 /// - Proměnné se identifikují názvem (text)
 /// - Při změně předává notifikace do widgetu a pomocí události [onValueChanged] do view modelu.
 /// -
+
 class ValueState extends ChangeNotifier implements ValueListenable<dynamic>
 {
   String name;
@@ -240,7 +242,7 @@ class ValueState extends ChangeNotifier implements ValueListenable<dynamic>
   final ValueStateInitializedEvent? onInitialized;
   final ValueStateEvent? onEvent;
   final ValueChangedEvent? onValueChanged;
-  Map<dynamic, dynamic>? _properties;
+  //Map<dynamic, dynamic>? _properties; ~~smazat properties
   dynamic tag;
 
   static final runtimeTypeDouble = (0.0).runtimeType;
@@ -250,17 +252,20 @@ class ValueState extends ChangeNotifier implements ValueListenable<dynamic>
 
   ValueState
   (
-    this.name, this._value,
-    {this.presenter,
+    this.name,
+    this._value,
+    {
+      this.presenter,
       this.onInitialized,
       this.onEvent,
       this.onValueChanged,
       this.tag,
       Key? key,
-      Map<dynamic, dynamic>? properties}
+    }
+    //Map<dynamic, dynamic>? properties} ~~smazat properties
   )
-  : _properties = properties,
-  _key = key;
+  //: _properties = properties, ~~smazat properties
+  : _key = key;
 
   T read<T>([dynamic parameter]) => (presenter == null) ? _value as T : presenter!(_value, parameter, T) as T;
 
@@ -364,6 +369,7 @@ class ValueState extends ChangeNotifier implements ValueListenable<dynamic>
     );
   }
 
+/* ~~smazat properties
   dynamic getProperty(dynamic key) => this._properties?[key];
 
   void setProperty(dynamic key, dynamic value, [bool forceNotify = false])
@@ -377,6 +383,7 @@ class ValueState extends ChangeNotifier implements ValueListenable<dynamic>
       this.forceValueNotify();
     }
   }
+*/
 
   static ValueState of(BuildContext context, String name, {dynamic defaultValue})
   {

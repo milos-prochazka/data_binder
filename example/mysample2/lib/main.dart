@@ -76,6 +76,7 @@ class _MyHomePageState extends State<MyHomePage>
       tag: 'qAqA',
       presenter: (v, param, type)
       {
+        final strType = type.toString();
         final value = v as int;
         if (type == ValueState.runtimeTypeDouble)
         {
@@ -85,12 +86,16 @@ class _MyHomePageState extends State<MyHomePage>
         {
           return (value & 1) == 1;
         }
+        else if (strType == 'TextStyle?')
+        {
+          return (value & 1) == 1 ? style1 : style2;
+        }
         else
         {
           return '[$value]';
         }
       },
-      onValueChanged: (value) => value.setProperty('style', (value.value & 1) == 1 ? style1 : style2)
+      //onValueChanged: (value) => value.setProperty('style', (value.value & 1) == 1 ? style1 : style2)
     );
 
     cnt.addValueListener
