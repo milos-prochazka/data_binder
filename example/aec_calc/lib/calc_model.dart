@@ -1,5 +1,9 @@
+// ignore_for_file: avoid_init_to_null
+
 import 'package:data_binder/data_binder.dart';
 import 'package:flutter/src/widgets/framework.dart';
+
+import 'calc_operator.dart';
 
 class CalcModel
 {
@@ -8,7 +12,7 @@ class CalcModel
   String textEntry = '0.';
   late ValueState display;
   double yReg = 0;
-  String operation = '';
+  CalcOperator operation = CalcOperator.noop;
 
   CalcModel()
   {
@@ -18,70 +22,91 @@ class CalcModel
 
   keyDown(ValueState value, BuildContext? context, event, parameter)
   {
-    String keyDown = parameter as String;
+    final key = (parameter as CalcOperator);
 
-    if ("0".compareTo(keyDown) <= 0 && "9".compareTo(keyDown) >= 0)
+    switch (key.type)
     {
+      case CalcOpType.digit:
       if (!entryMode)
       {
         entryMode = true;
-        textEntry = keyDown;
+        textEntry = key.name;
       }
       else
       {
-        if (textEntry == '0')
+        if (key.operation == CalcOp.dot)
         {
-          textEntry = keyDown;
+          if (!textEntry.contains("."))
+          {
+            textEntry += '.';
+          }
         }
         else
         {
-          textEntry += keyDown;
+          if (textEntry == '0')
+          {
+            textEntry = key.name;
+          }
+          else
+          {
+            textEntry += key.name;
+          }
         }
       }
-    }
-    else if ("." == keyDown)
-    {
-      if (!textEntry.contains("."))
-      {
-        textEntry += '.';
-      }
-    }
-    else if ('+-*/'.contains(keyDown))
-    {
-      doOp(keyDown);
+      break;
+
+      case CalcOpType.twoOp:
+      doOp(key);
+      break;
+
+      case CalcOpType.singleOp:
+      // TODO: Handle this case.
+      break;
+      case CalcOpType.singleFunction:
+      // TODO: Handle this case.
+      break;
+      case CalcOpType.edit:
+      // TODO: Handle this case.
+      break;
+      case CalcOpType.global:
+      // TODO: Handle this case.
+      break;
     }
 
     display.forceValueNotify();
   }
 
-  doOp(String op)
+  doOp(CalcOperator op)
   {
-    if (operation.isNotEmpty)
+    if (operation.operation != CalcOp.noop)
     {
       final xReg = double.parse(textEntry);
 
-      switch (operation)
+      switch (operation?.operation)
       {
-        case '+':
+        case CalcOp.add:
         yReg += xReg;
         textEntry = yReg.toString();
         break;
 
-        case '-':
+        case CalcOp.subtract:
         yReg -= xReg;
         break;
 
-        case '*':
+        case CalcOp.multiply:
         yReg *= xReg;
         break;
 
-        case '/':
+        case CalcOp.divide:
         yReg /= xReg;
+        break;
+
+        default:
         break;
       }
 
       textEntry = yReg.toString();
-      operation = '';
+      operation = CalcOperator.noop;
       entryMode = false;
     }
     else

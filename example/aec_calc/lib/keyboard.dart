@@ -1,6 +1,7 @@
 import 'package:data_binder/data_binder.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'calc_operator.dart';
 
 Widget buildDecimalKeyboard(BuildContext context)
 {
@@ -11,32 +12,33 @@ Widget buildDecimalKeyboard(BuildContext context)
     {
       const keys =
       [
-        _calcKey('C'),
-        _calcKey('M+'),
-        _calcKey('M-'),
-        _calcKey('MRC'),
+        CalcOperator(CalcOp.clearAll, CalcOpType.edit, name: 'C'),
+        CalcOperator(CalcOp.memoryAdd, CalcOpType.edit, name: 'M+'),
+        CalcOperator(CalcOp.memorySubtract, CalcOpType.edit, name: 'M-'),
+        CalcOperator(CalcOp.memoryRead, CalcOpType.edit, name: 'MRC'),
         /////////////
-        _calcKey('7'),
-        _calcKey('8'),
-        _calcKey('9'),
-        _calcKey('/'),
+        CalcOperator(CalcOp.$7, CalcOpType.digit, name: '7'),
+        CalcOperator(CalcOp.$8, CalcOpType.digit, name: '8'),
+        CalcOperator(CalcOp.$9, CalcOpType.digit, name: '9'),
+        CalcOperator(CalcOp.divide, CalcOpType.twoOp, name: '/'),
         /////////////
-        _calcKey('4'),
-        _calcKey('5'),
-        _calcKey('6'),
-        _calcKey('*'),
+        CalcOperator(CalcOp.$4, CalcOpType.digit, name: '4'),
+        CalcOperator(CalcOp.$5, CalcOpType.digit, name: '5'),
+        CalcOperator(CalcOp.$6, CalcOpType.digit, name: '6'),
+        CalcOperator(CalcOp.multiply, CalcOpType.twoOp, name: '*'),
         /////////////
-        _calcKey('1'),
-        _calcKey('2'),
-        _calcKey('3'),
-        _calcKey('-'),
+        CalcOperator(CalcOp.$1, CalcOpType.digit, name: '1'),
+        CalcOperator(CalcOp.$2, CalcOpType.digit, name: '2'),
+        CalcOperator(CalcOp.$3, CalcOpType.digit, name: '3'),
+        CalcOperator(CalcOp.subtract, CalcOpType.twoOp, name: '-'),
         /////////////
-        _calcKey('0'),
-        _calcKey('.'),
-        _calcKey('='),
-        _calcKey('+'),
+        CalcOperator(CalcOp.$0, CalcOpType.digit, name: '0'),
+        CalcOperator(CalcOp.dot, CalcOpType.digit, name: '.'),
+        CalcOperator(CalcOp.equal, CalcOpType.singleOp, name: '=', endExpression: true),
+        CalcOperator(CalcOp.add, CalcOpType.twoOp, name: '+'),
         /////////////
       ];
+
       final media = MediaQuery.of(context);
       final sz = Size(media.size.width, media.size.width);
 
@@ -47,9 +49,8 @@ Widget buildDecimalKeyboard(BuildContext context)
         (
           ElevatedButton
           (
-            onPressed: () =>
-            eventValue.doEvent(context: context, event: StdValueProperty.onClicked, parameter: key.text),
-            child: Text(key.text)
+            onPressed: () => eventValue.doEvent(context: context, event: StdValueProperty.onClicked, parameter: key),
+            child: Text(key.name)
           )
         );
       }
