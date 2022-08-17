@@ -11,8 +11,8 @@ class CalcModel
   bool entryMode = false;
   String textEntry = '0.';
   late ValueState display;
-  double yReg = 0;
-  CalcOperator operation = CalcOperator.noop;
+  final opStack = <CalcOperator>[];
+  final valueStack = <double>[];
 
   CalcModel()
   {
@@ -22,19 +22,19 @@ class CalcModel
 
   keyDown(ValueState value, BuildContext? context, event, parameter)
   {
-    final key = (parameter as CalcOperator);
+    final op = (parameter as CalcOperator);
 
-    switch (key.type)
+    switch (op.type)
     {
       case CalcOpType.digit:
       if (!entryMode)
       {
         entryMode = true;
-        textEntry = key.name;
+        textEntry = op.name;
       }
       else
       {
-        if (key.operation == CalcOp.dot)
+        if (op.operation == CalcOp.dot)
         {
           if (!textEntry.contains("."))
           {
@@ -45,18 +45,18 @@ class CalcModel
         {
           if (textEntry == '0')
           {
-            textEntry = key.name;
+            textEntry = op.name;
           }
           else
           {
-            textEntry += key.name;
+            textEntry += op.name;
           }
         }
       }
       break;
 
       case CalcOpType.twoOp:
-      doOp(key);
+      doOp(op);
       break;
 
       case CalcOpType.singleOp:
@@ -78,43 +78,66 @@ class CalcModel
 
   doOp(CalcOperator op)
   {
-    if (operation.operation != CalcOp.noop)
+    if (entryMode)
     {
+      bool show = false;
+
       final xReg = double.parse(textEntry);
+      entryMode = false;
+      valueStack.add(xReg);
 
-      switch (operation?.operation)
+      while (opStack.isNotEmpty && op.priority <= opStack.last.priority && calcStackTop())
       {
-        case CalcOp.add:
-        yReg += xReg;
-        textEntry = yReg.toString();
-        break;
-
-        case CalcOp.subtract:
-        yReg -= xReg;
-        break;
-
-        case CalcOp.multiply:
-        yReg *= xReg;
-        break;
-
-        case CalcOp.divide:
-        yReg /= xReg;
-        break;
-
-        default:
-        break;
+        show = true;
       }
 
-      textEntry = yReg.toString();
-      operation = CalcOperator.noop;
-      entryMode = false;
+      opStack.add(op);
+
+      if (show && valueStack.isNotEmpty)
+      {
+        textEntry = valueStack.last.toString();
+      }
     }
-    else
+  }
+
+  bool calcStackTop()
+  {
+    var result = false;
+
+    if (opStack.isNotEmpty)
     {
-      operation = op;
-      yReg = double.parse(textEntry);
-      entryMode = false;
+      final op = opStack.last;
+      if (op.type == CalcOpType.singleOp)
+      {
+        if (valueStack.isNotEmpty)
+        {
+          result = true;
+
+          opStack.removeLast();
+
+          var xReg = valueStack.last;
+          xReg = op.function(xReg, 0);
+          valueStack.last = xReg;
+        }
+      }
+      else if (op.type == CalcOpType.twoOp)
+      {
+        if (valueStack.length >= 2)
+        {
+          result = true;
+
+          opStack.removeLast();
+          final yReg = valueStack.removeLast();
+          var xReg = valueStack.removeLast();
+
+          xReg = op.function(xReg, yReg);
+
+          valueStack.add(xReg);
+        }
+      }
     }
+
+    return result;
   }
 
   displayText(value, parameter, Type type)

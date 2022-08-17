@@ -20,22 +20,22 @@ Widget buildDecimalKeyboard(BuildContext context)
         CalcOperator(CalcOp.$7, CalcOpType.digit, name: '7'),
         CalcOperator(CalcOp.$8, CalcOpType.digit, name: '8'),
         CalcOperator(CalcOp.$9, CalcOpType.digit, name: '9'),
-        CalcOperator(CalcOp.divide, CalcOpType.twoOp, name: '/'),
+        CalcOperator(CalcOp.divide, CalcOpType.twoOp, name: '/', priority: 200, function: _div),
         /////////////
         CalcOperator(CalcOp.$4, CalcOpType.digit, name: '4'),
         CalcOperator(CalcOp.$5, CalcOpType.digit, name: '5'),
         CalcOperator(CalcOp.$6, CalcOpType.digit, name: '6'),
-        CalcOperator(CalcOp.multiply, CalcOpType.twoOp, name: '*'),
+        CalcOperator(CalcOp.multiply, CalcOpType.twoOp, name: '*', priority: 200, function: _mul),
         /////////////
         CalcOperator(CalcOp.$1, CalcOpType.digit, name: '1'),
         CalcOperator(CalcOp.$2, CalcOpType.digit, name: '2'),
         CalcOperator(CalcOp.$3, CalcOpType.digit, name: '3'),
-        CalcOperator(CalcOp.subtract, CalcOpType.twoOp, name: '-'),
+        CalcOperator(CalcOp.subtract, CalcOpType.twoOp, name: '-', function: _sub),
         /////////////
         CalcOperator(CalcOp.$0, CalcOpType.digit, name: '0'),
         CalcOperator(CalcOp.dot, CalcOpType.digit, name: '.'),
-        CalcOperator(CalcOp.equal, CalcOpType.singleOp, name: '=', endExpression: true),
-        CalcOperator(CalcOp.add, CalcOpType.twoOp, name: '+'),
+        CalcOperator(CalcOp.equal, CalcOpType.singleOp, name: '=', priority: 0, endExpression: true),
+        CalcOperator(CalcOp.add, CalcOpType.twoOp, name: '+', function: _add),
         /////////////
       ];
 
@@ -81,3 +81,8 @@ class _calcKey
 
   const _calcKey(this.text);
 }
+
+CalcNumber _add(CalcNumber x, CalcNumber y) => x + y;
+CalcNumber _sub(CalcNumber x, CalcNumber y) => x - y;
+CalcNumber _mul(CalcNumber x, CalcNumber y) => x * y;
+CalcNumber _div(CalcNumber x, CalcNumber y) => x / y;

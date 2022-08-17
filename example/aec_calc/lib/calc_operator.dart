@@ -1,5 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
+typedef CalcNumber = double;
+
 class CalcOperator
 {
   final CalcOpType type;
@@ -7,11 +9,17 @@ class CalcOperator
   final int priority;
   final String name;
   final bool endExpression;
+  final CalcFunction function;
 
-  const CalcOperator(this.operation, this.type, {this.name = '', this.priority = 100, this.endExpression = false});
+  const CalcOperator(this.operation, this.type,
+    {this.name = '', this.priority = 100, this.endExpression = false, this.function = _noopCalc});
 
   static CalcOperator get noop => const CalcOperator(CalcOp.noop, CalcOpType.global);
+
+  static CalcNumber _noopCalc(CalcNumber x, CalcNumber y) => x;
 }
+
+typedef CalcFunction = CalcNumber Function(CalcNumber x, CalcNumber y);
 
 enum CalcOpType { digit, twoOp, singleOp, singleFunction, edit, global }
 
