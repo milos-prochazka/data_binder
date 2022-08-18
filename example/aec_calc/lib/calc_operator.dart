@@ -14,10 +14,10 @@ class CalcOperator
   const CalcOperator(this.operation, this.type,
     {this.name = '', this.priority = 100, this.endExpression = false, this.function = _noopCalc});
 
-  static CalcOperator get noop => const CalcOperator(CalcOp.noop, CalcOpType.global);
-
-  static CalcNumber _noopCalc(CalcNumber x, CalcNumber y) => x;
+  static const CalcOperator noop = CalcOperator(CalcOp.noop, CalcOpType.global);
 }
+
+CalcNumber _noopCalc(CalcNumber x, CalcNumber y) => x;
 
 typedef CalcFunction = CalcNumber Function(CalcNumber x, CalcNumber y);
 
@@ -36,18 +36,26 @@ enum CalcOp
   $8(8),
   $9(9),
   dot(10),
+  ////////////////
   clearAll(100),
   clearLast(101),
   delete(102),
+  ////////////////
   memoryRead(200),
   memoryAdd(201),
   memorySubtract(202),
+  ////////////////
   equal(1000),
   add(1001),
   subtract(1002),
   multiply(1003),
   divide(1004),
-
+  leftBrace(1005),
+  rightBrace(1006),
+  ////////////////
+  powerTwo(2001),
+  squreRoot(2002),
+  ////////////////
   noop(10000);
 
   final int value;

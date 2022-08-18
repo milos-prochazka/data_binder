@@ -2,6 +2,7 @@ import 'package:data_binder/data_binder.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'calc_operator.dart';
+import 'dart:math' as math;
 
 Widget buildDecimalKeyboard(BuildContext context)
 {
@@ -16,6 +17,11 @@ Widget buildDecimalKeyboard(BuildContext context)
         CalcOperator(CalcOp.memoryAdd, CalcOpType.edit, name: 'M+'),
         CalcOperator(CalcOp.memorySubtract, CalcOpType.edit, name: 'M-'),
         CalcOperator(CalcOp.memoryRead, CalcOpType.edit, name: 'MRC'),
+        /////////////
+        CalcOperator(CalcOp.squreRoot, CalcOpType.singleFunction, name: '√', function: _sqr),
+        CalcOperator(CalcOp.powerTwo, CalcOpType.singleFunction, name: 'x²', function: _powerTwo),
+        CalcOperator(CalcOp.leftBrace, CalcOpType.global, name: '(', priority: 5),
+        CalcOperator(CalcOp.rightBrace, CalcOpType.global, name: ')', priority: 5),
         /////////////
         CalcOperator(CalcOp.$7, CalcOpType.digit, name: '7'),
         CalcOperator(CalcOp.$8, CalcOpType.digit, name: '8'),
@@ -65,7 +71,7 @@ Widget buildDecimalKeyboard(BuildContext context)
             crossAxisCount: 4,
             mainAxisSpacing: 5,
             crossAxisSpacing: 5,
-            childAspectRatio: 1.5,
+            childAspectRatio: 6.1 / 4.0,
             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
             children: children,
           ),
@@ -82,6 +88,8 @@ class _calcKey
   const _calcKey(this.text);
 }
 
+CalcNumber _sqr(CalcNumber x, CalcNumber y) => math.sqrt(x);
+CalcNumber _powerTwo(CalcNumber x, CalcNumber y) => x * x;
 CalcNumber _add(CalcNumber x, CalcNumber y) => x + y;
 CalcNumber _sub(CalcNumber x, CalcNumber y) => x - y;
 CalcNumber _mul(CalcNumber x, CalcNumber y) => x * y;

@@ -60,13 +60,12 @@ class CalcModel
       break;
 
       case CalcOpType.singleOp:
-      // TODO: Handle this case.
-      break;
       case CalcOpType.singleFunction:
-      // TODO: Handle this case.
+      singleOp(op);
       break;
+
       case CalcOpType.edit:
-      // TODO: Handle this case.
+      doEdit(op);
       break;
       case CalcOpType.global:
       // TODO: Handle this case.
@@ -80,23 +79,61 @@ class CalcModel
   {
     if (entryMode)
     {
-      bool show = false;
-
       final xReg = double.parse(textEntry);
       entryMode = false;
       valueStack.add(xReg);
+    }
 
-      while (opStack.isNotEmpty && op.priority <= opStack.last.priority && calcStackTop())
+    bool show = false;
+    while (opStack.isNotEmpty && op.priority <= opStack.last.priority && calcStackTop())
+    {
+      show = true;
+    }
+
+    opStack.add(op);
+
+    if (show && valueStack.isNotEmpty)
+    {
+      textEntry = valueStack.last.toString();
+    }
+  }
+
+  singleOp(CalcOperator op)
+  {
+    if (entryMode)
+    {
+      final xReg = double.parse(textEntry);
+      entryMode = false;
+
+      final tReg = op.function(xReg, 0);
+
+      valueStack.add(tReg);
+      textEntry = tReg.toString();
+    }
+    else
+    {
+      if (valueStack.isNotEmpty)
       {
-        show = true;
+        final tReg = op.function(valueStack.last, 0);
+        valueStack.last = tReg;
+        textEntry = tReg.toString();
       }
+    }
+  }
 
-      opStack.add(op);
+  doEdit(CalcOperator op)
+  {
+    switch (op.operation)
+    {
+      case CalcOp.clearAll:
+      textEntry = '0.';
+      entryMode = false;
+      valueStack.clear();
+      opStack.clear();
+      break;
 
-      if (show && valueStack.isNotEmpty)
-      {
-        textEntry = valueStack.last.toString();
-      }
+      default:
+      break;
     }
   }
 
@@ -107,33 +144,43 @@ class CalcModel
     if (opStack.isNotEmpty)
     {
       final op = opStack.last;
-      if (op.type == CalcOpType.singleOp)
+      switch (op.type)
       {
-        if (valueStack.isNotEmpty)
+        case CalcOpType.singleOp:
+        case CalcOpType.singleFunction:
         {
-          result = true;
+          if (valueStack.isNotEmpty)
+          {
+            result = true;
 
-          opStack.removeLast();
+            opStack.removeLast();
 
-          var xReg = valueStack.last;
-          xReg = op.function(xReg, 0);
-          valueStack.last = xReg;
+            var xReg = valueStack.last;
+            xReg = op.function(xReg, 0);
+            valueStack.last = xReg;
+          }
         }
-      }
-      else if (op.type == CalcOpType.twoOp)
-      {
-        if (valueStack.length >= 2)
+        break;
+
+        case CalcOpType.twoOp:
         {
-          result = true;
+          if (valueStack.length >= 2)
+          {
+            result = true;
 
-          opStack.removeLast();
-          final yReg = valueStack.removeLast();
-          var xReg = valueStack.removeLast();
+            opStack.removeLast();
+            final yReg = valueStack.removeLast();
+            var xReg = valueStack.removeLast();
 
-          xReg = op.function(xReg, yReg);
+            xReg = op.function(xReg, yReg);
 
-          valueStack.add(xReg);
+            valueStack.add(xReg);
+          }
         }
+        break;
+
+        default:
+        break;
       }
     }
 
