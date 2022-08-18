@@ -67,8 +67,9 @@ class CalcModel
       case CalcOpType.edit:
       doEdit(op);
       break;
+
       case CalcOpType.global:
-      // TODO: Handle this case.
+      doGlobal(op);
       break;
     }
 
@@ -126,16 +127,60 @@ class CalcModel
     switch (op.operation)
     {
       case CalcOp.clearAll:
-      textEntry = '0.';
-      entryMode = false;
-      valueStack.clear();
-      opStack.clear();
+      {
+        textEntry = '0.';
+        entryMode = false;
+        valueStack.clear();
+        opStack.clear();
+      }
       break;
 
       default:
       break;
     }
   }
+
+  doGlobal(CalcOperator op)
+  {
+    switch (op.operation)
+    {
+      case CalcOp.leftBrace:
+      {
+        if (entryMode)
+        {
+          final xReg = double.parse(textEntry);
+          entryMode = false;
+          valueStack.add(xReg);
+          opStack.add(CalcOperator(CalcOp.multiply, CalcOpType.twoOp, name: '*', function: _mul));
+        }
+
+        opStack.add(op);
+        textEntry = '0.';
+      }
+      break;
+
+      case CalcOp.rightBrace:
+      {
+        while (opStack.isNotEmpty)
+        {
+          final lastOp = opStack.last;
+
+          if (!calcStackTop() || lastOp.operation == CalcOp.leftBrace)
+          {
+            break;
+          }
+        }
+
+        textEntry = valueStack.last.toString();
+      }
+      break;
+
+      default:
+      break;
+    }
+  }
+
+  CalcNumber _mul(CalcNumber x, CalcNumber y) => x * y;
 
   bool calcStackTop()
   {
