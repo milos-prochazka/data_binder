@@ -40,13 +40,15 @@ Widget buildDecimalKeyboard(BuildContext context)
         /////////////
         CalcOperator(CalcOp.$0, CalcOpType.digit, name: '0'),
         CalcOperator(CalcOp.dot, CalcOpType.digit, name: '.'),
-        CalcOperator(CalcOp.equal, CalcOpType.singleOp, name: '=', priority: 0, endExpression: true),
+        CalcOperator(CalcOp.equal, CalcOpType.global, name: '='),
         CalcOperator(CalcOp.add, CalcOpType.twoOp, name: '+', function: _add),
         /////////////
       ];
 
       final media = MediaQuery.of(context);
       final sz = Size(media.size.width, media.size.width);
+
+      final buttonStyle = ElevatedButton.styleFrom(primary: Colors.black87);
 
       final children = <Widget>[];
       for (final key in keys)
@@ -55,17 +57,19 @@ Widget buildDecimalKeyboard(BuildContext context)
         (
           ElevatedButton
           (
+            style: buttonStyle,
             onPressed: () => eventValue.doEvent(context: context, event: StdValueProperty.onClicked, parameter: key),
             child: Text(key.name)
           )
         );
       }
+
       return SizedBox.fromSize
       (
         size: sz,
         child: Container
         (
-          color: Colors.amber,
+          color: Colors.grey[400],
           child: GridView.count
           (
             crossAxisCount: 4,

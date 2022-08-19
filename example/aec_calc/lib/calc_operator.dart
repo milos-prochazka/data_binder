@@ -8,11 +8,9 @@ class CalcOperator
   final CalcOp operation;
   final int priority;
   final String name;
-  final bool endExpression;
   final CalcFunction function;
 
-  const CalcOperator(this.operation, this.type,
-    {this.name = '', this.priority = 100, this.endExpression = false, this.function = _noopCalc});
+  const CalcOperator(this.operation, this.type, {this.name = '', this.priority = 100, this.function = _noopCalc});
 
   static const CalcOperator noop = CalcOperator(CalcOp.noop, CalcOpType.global);
 }

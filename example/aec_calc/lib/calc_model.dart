@@ -8,7 +8,7 @@ import 'calc_operator.dart';
 class CalcModel
 {
   final binder = DataBinder(autoCreateValue: true);
-  bool entryMode = false;
+  _EntryMode entryMode = _EntryMode.wait;
   String textEntry = '0.';
   late ValueState display;
   final opStack = <CalcOperator>[];
@@ -23,13 +23,18 @@ class CalcModel
   keyDown(ValueState value, BuildContext? context, event, parameter)
   {
     final op = (parameter as CalcOperator);
+    print('KEY DOWN: ${op.name} *************************************************************');
 
     switch (op.type)
     {
       case CalcOpType.digit:
-      if (!entryMode)
+      if (entryMode != _EntryMode.edit)
       {
-        entryMode = true;
+        if (entryMode == _EntryMode.number && valueStack.isNotEmpty)
+        {
+          valueStack.removeLast();
+        }
+        entryMode = _EntryMode.edit;
         textEntry = op.name;
       }
       else
@@ -74,16 +79,12 @@ class CalcModel
     }
 
     display.forceValueNotify();
+    print(toString());
   }
 
   doOp(CalcOperator op)
   {
-    if (entryMode)
-    {
-      final xReg = double.parse(textEntry);
-      entryMode = false;
-      valueStack.add(xReg);
-    }
+    _storeEntry();
 
     bool show = false;
     while (opStack.isNotEmpty && op.priority <= opStack.last.priority && calcStackTop())
@@ -91,7 +92,9 @@ class CalcModel
       show = true;
     }
 
+    _removeRedundantOperator();
     opStack.add(op);
+    entryMode = _EntryMode.operator;
 
     if (show && valueStack.isNotEmpty)
     {
@@ -101,24 +104,14 @@ class CalcModel
 
   singleOp(CalcOperator op)
   {
-    if (entryMode)
+    _storeEntry();
+
+    if (valueStack.isNotEmpty)
     {
-      final xReg = double.parse(textEntry);
-      entryMode = false;
-
-      final tReg = op.function(xReg, 0);
-
-      valueStack.add(tReg);
+      final tReg = op.function(valueStack.last, 0);
+      valueStack.last = tReg;
       textEntry = tReg.toString();
-    }
-    else
-    {
-      if (valueStack.isNotEmpty)
-      {
-        final tReg = op.function(valueStack.last, 0);
-        valueStack.last = tReg;
-        textEntry = tReg.toString();
-      }
+      entryMode = _EntryMode.number;
     }
   }
 
@@ -129,7 +122,7 @@ class CalcModel
       case CalcOp.clearAll:
       {
         textEntry = '0.';
-        entryMode = false;
+        entryMode = _EntryMode.wait;
         valueStack.clear();
         opStack.clear();
       }
@@ -146,16 +139,10 @@ class CalcModel
     {
       case CalcOp.leftBrace:
       {
-        if (entryMode)
-        {
-          final xReg = double.parse(textEntry);
-          entryMode = false;
-          valueStack.add(xReg);
-          opStack.add(CalcOperator(CalcOp.multiply, CalcOpType.twoOp, name: '*', function: _mul));
-        }
-
+        _storeEntry(() => opStack.add(CalcOperator(CalcOp.multiply, CalcOpType.twoOp, name: '*', function: _mul)));
         opStack.add(op);
         textEntry = '0.';
+        entryMode = _EntryMode.wait;
       }
       break;
 
@@ -165,13 +152,43 @@ class CalcModel
         {
           final lastOp = opStack.last;
 
+          _removeRedundantOperator();
+          print(toString());
+
+          _storeEntry();
+          print(toString());
+
           if (!calcStackTop() || lastOp.operation == CalcOp.leftBrace)
           {
+            print(toString());
             break;
           }
         }
 
-        textEntry = valueStack.last.toString();
+        if (valueStack.isNotEmpty)
+        {
+          textEntry = valueStack.last.toString();
+        }
+      }
+      break;
+
+      case CalcOp.equal:
+      {
+        _removeRedundantOperator();
+        print(toString());
+
+        _storeEntry();
+        print(toString());
+
+        while (calcStackTop())
+        {
+          print(toString());
+        }
+
+        if (valueStack.isNotEmpty)
+        {
+          textEntry = valueStack.last.toString();
+        }
       }
       break;
 
@@ -225,6 +242,10 @@ class CalcModel
         break;
 
         default:
+        {
+          opStack.removeLast();
+          result = true;
+        }
         break;
       }
     }
@@ -236,4 +257,55 @@ class CalcModel
   {
     return textEntry;
   }
+
+  bool _storeEntry([_EntryFunction? entryFunction])
+  {
+    var result = false;
+
+    if (entryMode == _EntryMode.edit)
+    {
+      final xReg = double.parse(textEntry);
+      valueStack.add(xReg);
+      entryMode = _EntryMode.wait;
+      entryFunction?.call();
+      result = true;
+    }
+
+    return result;
+  }
+
+  _removeRedundantOperator()
+  {
+    if (entryMode == _EntryMode.operator && opStack.isNotEmpty)
+    {
+      opStack.removeLast();
+      entryMode = _EntryMode.wait;
+    }
+  }
+
+  @override
+  String toString()
+  {
+    final builder = StringBuffer();
+
+    builder.writeln('"$textEntry" $entryMode');
+
+    for (final value in valueStack)
+    {
+      builder.write(value.toString());
+      builder.write(',');
+    }
+    builder.writeln();
+
+    for (final value in opStack)
+    {
+      builder.write('"${value.name}",');
+    }
+
+    return builder.toString();
+  }
 }
+
+typedef _EntryFunction = Function();
+
+enum _EntryMode { wait, edit, number, operator }
