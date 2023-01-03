@@ -402,9 +402,9 @@ class ValueState extends ChangeNotifier implements ValueListenable<dynamic>
 
 typedef ValueStateWidgetBuilder = Widget Function(BuildContext context, ValueState value, Widget? child);
 typedef ValueStateInitializer = dynamic Function(BuildContext context, ValueState value);
-typedef ValueStateInitializedEvent = Function(BuildContext context, ValueState value, dynamic state);
-typedef ValueStateEvent = Function(ValueState value, BuildContext? context, dynamic event, dynamic parameter);
-typedef ValueChangedEvent = Function(ValueState value);
+typedef ValueStateInitializedEvent = void Function(BuildContext context, ValueState value, dynamic state);
+typedef ValueStateEvent = void Function(ValueState value, BuildContext? context, dynamic event, dynamic parameter);
+typedef ValueChangedEvent = void Function(ValueState value);
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
