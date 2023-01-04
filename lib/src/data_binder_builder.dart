@@ -1290,7 +1290,7 @@ Widget buildTextField
     builder: (context, value, child)
     {
       //final value = v as ValueState<String>;
-      final TextFieldControllers controller = value.setState
+      final TextFieldControllers controller = value.initializeState
       (
         context: context,
         initializer: (context, value) =>
@@ -1502,7 +1502,7 @@ Widget buildCupertinoTextField
     builder: (context, value, child)
     {
       //final value = v as ValueState<String>;
-      final TextFieldControllers controller = value.setState
+      final TextFieldControllers controller = value.initializeState
       (
         context: context,
         initializer: (context, value) =>
@@ -1689,7 +1689,7 @@ Widget buildCupertinoTextFieldBorderless
     builder: (context, value, child)
     {
       //final value = v as ValueState<String>;
-      final TextFieldControllers controller = value.setState
+      final TextFieldControllers controller = value.initializeState
       (
         context: context,
         initializer: (context, value) =>
@@ -2392,7 +2392,7 @@ Widget buildCupertinoActionSheet
           : null
         );
 
-        value.setState(context: context, initializer: (context, value) => state);
+        value.initializeState(context: context, initializer: (context, value) => state);
       }
 
       return CupertinoActionSheet

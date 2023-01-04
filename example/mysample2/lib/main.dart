@@ -277,7 +277,7 @@ class _MyHomePageState extends State<MyHomePage>
                       {
                         return TextField
                         (
-                          controller: value.setState
+                          controller: value.initializeState
                           (
                             context: context,
                             initializer: (context, value)

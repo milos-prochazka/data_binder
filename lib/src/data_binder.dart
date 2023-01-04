@@ -300,7 +300,7 @@ class ValueState extends ChangeNotifier implements ValueListenable<dynamic>
     return _key;
   }
 
-  T setState<T>({required BuildContext context, required ValueStateInitializer initializer})
+  T initializeState<T>({required BuildContext context, required ValueStateInitializer initializer})
   {
     if (this.state == null)
     {
