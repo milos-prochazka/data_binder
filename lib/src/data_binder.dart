@@ -233,11 +233,17 @@ class DataBinderWidget extends InheritedWidget
 /// - Proměnné se identifikují názvem (text)
 /// - Při změně předává notifikace do widgetu a pomocí události [onValueChanged] do view modelu.
 /// -
-
 class ValueState extends ChangeNotifier implements ValueListenable<dynamic>
 {
+  /// Název proměnné 
+  /// - Slouží k identifikaci proměnné v rámci [DataBinder]
   String name;
+
+  /// Prezentace proměnné 
+  /// - Slouží ke konverzi hodnoty proměnné při četní pomocí funkcí [read] a [readString]
+  /// - Používá se zejména při zobrazení stavu proměnné
   ValuePresenter? presenter;
+
   dynamic state;
   final ValueStateInitializedEvent? onInitialized;
   final ValueStateEvent? onEvent;
@@ -250,6 +256,9 @@ class ValueState extends ChangeNotifier implements ValueListenable<dynamic>
   static final runtimeTypeBool = (false).runtimeType;
   static final runtimeTypeString = ('').runtimeType;
 
+  ///
+  /// Konstruktor
+  /// 
   ValueState
   (
     this.name,
