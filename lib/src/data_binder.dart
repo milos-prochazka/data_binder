@@ -235,11 +235,11 @@ class DataBinderWidget extends InheritedWidget
 /// -
 class ValueState extends ChangeNotifier implements ValueListenable<dynamic>
 {
-  /// Název proměnné 
+  /// Název proměnné
   /// - Slouží k identifikaci proměnné v rámci [DataBinder]
   String name;
 
-  /// Prezentace proměnné 
+  /// Prezentace proměnné
   /// - Slouží ke konverzi hodnoty proměnné při četní pomocí funkcí [read] a [readString]
   /// - Používá se zejména při zobrazení stavu proměnné
   ValuePresenter? presenter;
@@ -258,7 +258,7 @@ class ValueState extends ChangeNotifier implements ValueListenable<dynamic>
 
   ///
   /// Konstruktor
-  /// 
+  ///
   ValueState
   (
     this.name,
@@ -476,6 +476,7 @@ enum StdValueProperty
   length(0x0003),
   slected(0x0004),
   checked(0x0005),
+  /////
   onClicked(0x1000),
   onSelect(0x1001),
   onComplete(0x1002),
@@ -489,7 +490,10 @@ enum StdValueProperty
   onChangeStart(0x100A),
   onChangeEnd(0x100B),
   onCanceled(0x100C),
-  onEnd(0x100D);
+  onEnd(0x100D),
+  onSizeChanged(0x100E),
+  ////
+  ;
 
   final int value;
   const StdValueProperty(this.value);
