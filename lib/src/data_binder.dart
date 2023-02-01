@@ -70,6 +70,7 @@ class DataBinder
   ///
   /// Argumenty
   /// - [name] - název proměnné.
+  /// - [value] - hodnota proměnné
   /// - [presenter] - funkce provadějící konverzi hodnoty proměnné do formátu požadovaného widgetem.
   /// - [onInitialized] - událost vyvolaná ve chvíli kdy widget nastaví stav proměnné (setState) a nastavuje.
   /// - [onValueChanged] - událost vyvolaná ve chvíli kdy se hodnota proměnné mění.
@@ -244,7 +245,13 @@ class ValueState extends ChangeNotifier implements ValueListenable<dynamic>
   /// - Používá se zejména při zobrazení stavu proměnné
   ValuePresenter? presenter;
 
+  /// Stav proměnné
+  /// - Používá se pro přenos stavu o Widgetu do modelu
+  /// - Nastavuje se při vytváření widgetu kdy je již přístupný BuildContext, aby widget přenesl stav
+  ///   do modelu.
+  /// TODO Ještě domyslet funkce v běhu programu (vytváří se pouze jednou a pak se jen spravuje. Je to správně??)
   dynamic state;
+
   final ValueStateInitializedEvent? onInitialized;
   final ValueStateEvent? onEvent;
   final ValueChangedEvent? onValueChanged;
@@ -259,6 +266,14 @@ class ValueState extends ChangeNotifier implements ValueListenable<dynamic>
   ///
   /// Konstruktor
   ///
+  /// Argumenty
+  /// - [name] - název proměnné.
+  /// - [value] - hodnota proměnné
+  /// - [presenter] - funkce provadějící konverzi hodnoty proměnné do formátu požadovaného widgetem.
+  /// - [onInitialized] - událost vyvolaná ve chvíli kdy widget nastaví stav proměnné (setState) a nastavuje.
+  /// - [onValueChanged] - událost vyvolaná ve chvíli kdy se hodnota proměnné mění.
+  /// - [onEvent] - událost kterou vyvolává zejména widget voláním doEvent (například tlačítko po tom co je stisknuto).
+  /// - [tag] - pomocná data. Může využívat jak Widget tak i View model.
   ValueState
   (
     this.name,
